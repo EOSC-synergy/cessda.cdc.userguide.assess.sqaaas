@@ -1,0 +1,56 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: fix/updatego
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/cessda/cessda.cdc.userguide:
+      branch: main
+      repo: https://github.com/cessda/cessda.cdc.userguide
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/cessda/cessda.cdc.userguide git:
+        commands:
+        - /usr/bin/env sh .sqa/script.cyan_wondrous_moth.sh
+        container: qc.acc_tan_persistent_roc
+  QC.Doc:
+    repos:
+      github.com/cessda/cessda.cdc.userguide find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.chili_assured_hydra.sh
+        container: qc.doc_cloud_meticulous_spren
+      github.com/cessda/cessda.cdc.userguide git:
+        commands:
+        - /usr/bin/env sh .sqa/script.royal_gentle_toad.sh
+        container: qc.doc_moss_artistic_platypus
+      github.com/cessda/cessda.cdc.userguide markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.sage_zany_bison.sh
+        container: qc.doc_ice_reserved_cockatoo
+      github.com/cessda/cessda.cdc.userguide restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.papaya_resourceful_angelfish.sh
+        container: qc.doc_steel_anxious_octopus
+  QC.Lic:
+    repos:
+      github.com/cessda/cessda.cdc.userguide licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.azure_reflective_squirrel.sh
+        container: qc.lic_sapphire_lively_macaw
+  QC.Sty:
+    repos:
+      github.com/cessda/cessda.cdc.userguide rubocop:
+        commands:
+        - /usr/bin/env sh .sqa/script.boysenberry_rational_jackal.sh
+        container: qc.sty_teal_aware_uakari
+  QC.Ver:
+    repos:
+      github.com/cessda/cessda.cdc.userguide get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.royal_confused_panther.sh
+        container: qc.ver_mustard_dizzy_raccoon
+timeout: 5400
